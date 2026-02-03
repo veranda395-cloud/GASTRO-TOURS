@@ -16,9 +16,9 @@ const Gallery: React.FC = () => {
         </div>
 
         {/* 
-            Container Logic:
-            Mobile: flex row, overflow-x-scroll, snap-x (carousel behavior)
-            Desktop: grid layout (original masonry-like feel)
+            Логика контейнера:
+            Mobile: flex (в ряд), скролл вбок (overflow-x-auto), прилипание (snap-x).
+            Desktop: сетка (grid) как было раньше.
         */}
         <div className="
           flex flex-nowrap overflow-x-auto snap-x snap-mandatory gap-4 pb-8 -mx-6 px-6 
@@ -30,8 +30,8 @@ const Gallery: React.FC = () => {
               key={item.id} 
               className={`
                 relative group overflow-hidden rounded-lg shadow-md cursor-pointer 
-                min-w-[85vw] h-[400px] flex-shrink-0 snap-center 
-                md:min-w-0 md:h-auto md:flex-shrink-1 md:snap-align-none
+                w-[85vw] aspect-[4/3] flex-shrink-0 snap-center 
+                md:w-auto md:aspect-auto md:h-auto md:flex-shrink-1 md:snap-align-none
                 ${item.className || ''}
               `}
             >
@@ -40,7 +40,7 @@ const Gallery: React.FC = () => {
                 alt={item.alt}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
-              {/* Overlay */}
+              {/* Затемнение и текст поверх фото */}
               <div className="absolute inset-0 bg-gradient-to-t from-deep-blue/80 via-transparent to-transparent opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                 <span className="text-terracotta text-xs font-bold tracking-wider uppercase mb-1 translate-y-0 md:translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                   {item.category}
@@ -53,8 +53,8 @@ const Gallery: React.FC = () => {
           ))}
         </div>
         
-        {/* Mobile Swipe Hint */}
-        <div className="text-center md:hidden flex justify-center gap-2 items-center opacity-60">
+        {/* Подсказка для мобильных, что можно листать */}
+        <div className="text-center md:hidden flex justify-center gap-2 items-center opacity-60 mt-2">
            <div className="w-1.5 h-1.5 rounded-full bg-terracotta"></div>
            <span className="text-sm text-terracotta font-serif italic">Листайте вправо</span>
            <div className="w-1.5 h-1.5 rounded-full bg-terracotta"></div>
